@@ -12,9 +12,10 @@
 */
 
 // Principle 1
-function sayAge(age) {
+function sayAge(name) {
+  "use strict"
   console.log(this);
-  return age;
+  return name;
 }
 sayAge('Monkey D Luffy');
 // code example for Window Binding
@@ -25,10 +26,11 @@ const intern = {
   lastName: 'Miranda',
   greeting: 'Hello',
   sayHello: function (age) {
-    console.log(`${this.greeting} my name is ${this.firstName} ${this.lastName} and i am ${age} years old!`)
+    return `${this.greeting} my name is ${this.firstName} ${this.lastName} and i am ${age} years old!`;
   }
 }
 intern.sayHello(23);
+
 
 // code example for Implicit Binding
 
@@ -37,7 +39,7 @@ function Intern(name) {
   this.greeting = 'Hello',
     this.name = name,
     this.speak = function () {
-      console.log(`${this.greeting} my name is ${name}`);
+      return `${this.greeting} my name is ${name}`;
     }
 }
 const janine = new Intern('Janine');
@@ -49,11 +51,13 @@ console.log(mikko.speak())
 // Principle 4
 function Intern(name) {
   this.greeting = 'Hello',
-    this.name = name,
-    this.speak = function () {
-      console.log(`${this.greeting} my name is ${name}`);
-    }
+    this.name = "mikko",
+    this.age = 23;
+  this.speak = function () {
+    return `${this.greeting} my name is ${this.name} and i'am ${this.age} years old`;
+  }
 }
 const janine = new Intern('Janine');
-janine.speak.apply(janine);
+janine.speak.apply(janine, ...name);
+// or janine.speak.apply(janine, name);
 // code example for Explicit Binding
