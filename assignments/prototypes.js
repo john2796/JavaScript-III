@@ -138,6 +138,9 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 // * Give the Hero and Villians different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 // * Create two new objects, one a villian and one a hero and fight it out with methods!
 
+// ===================================== Stretch ====================================
+
+// Hero
 function JohnHero(mikkoAttributes) {
   Humanoid.call(this, mikkoAttributes);
   this.village = mikkoAttributes.village;
@@ -159,18 +162,18 @@ JohnHero.prototype.combo = function () {
   return `COMBOOOOO !!! 😎😹 Air 💨,Earth 🌴,Water 💧,fire 🔥 damage -100hp your health is now ${this.hp - 100}hp`
 }
 
-// Stretch Villain
+//  Villain
 function VillainHero(villainAttributes) {
   Humanoid.call(this, villainAttributes);
   this.village = villainAttributes.village;
 }
 VillainHero.prototype = Object.create(Humanoid.prototype);
-VillainHero.prototype.fart = function () {
-  this.johnHealth -= 10;
-  return `Fart 💩-10hp damage ${this.johnHealth}hp`
+VillainHero.prototype.fart = function (johnHero) {
+  this.jhp -= 10;
+  return `Fart 💩-10hp damage ${this.jhp}hp`
 }
 VillainHero.prototype.poison = function () {
-  return `Poison 🐍 -25hp damage ${this.hp - 25}hp`
+  return `Poison 🐍 -25hp damage ${this.jhp - 25}hp`
 }
 
 // stretch char mikkoAvater
@@ -181,7 +184,7 @@ const john = new JohnHero({
     width: 1,
     height: 1,
   },
-  johnHealth: 100,
+  jhp: 100,
   name: 'John Ꭶ Hokage',
   faction: 'Avatar Guild',
   weapons: [
@@ -201,7 +204,7 @@ const villain = new VillainHero({
     width: 1,
     height: 1,
   },
-  villainHealth: 100,
+  vhp: 100,
   name: 'Ikimaru ☯︎',
   faction: 'Villain Guild',
   weapons: [
@@ -218,5 +221,8 @@ console.log(`The battle of ${john.name}  of ${john.village} and ${villain.name} 
 console.log(`One day the peaceful ${john.village} was attacked by ${villain.name} and killed 100 people of ${john.village}`)
 console.log(`${john.name} heard the bad news and immedietely look for ${villain.name} and challenge him to duel him to leave his village so no one else get hurt and they`);
 console.log(`The next morning ${john.name} ${villain.name} began their duel`);
-console.log(`First the ${villain.name} attacked ${john.name} with his fart 😹 power ${villain.fart()} ${john.johnHealth}`)
+
+console.log(`First the ${villain.name} attacked ${john.name} with his fart 😹 power ${villain.fart()} john health is now ${john.jhp}hp`)
+
+
 
