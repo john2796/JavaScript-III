@@ -146,20 +146,25 @@ function JohnHero(mikkoAttributes) {
   this.village = mikkoAttributes.village;
 }
 JohnHero.prototype = Object.create(Humanoid.prototype);
-JohnHero.prototype.fire = function () {
-  return `fire 🔥damage -5hp your health is now ${this.hp - 5}hp`
+JohnHero.prototype.fire = function (villainHero) {
+  villainHero.vhp -= 5;
+  return `fire 🔥damage -5hp your health is now ${villainHero.vhp}hp`
 }
-JohnHero.prototype.water = function () {
-  return `Water 💧 damage -10hp your health is now ${this.hp - 10}hp`
+JohnHero.prototype.water = function (villainHero) {
+  villainHero.vhp -= 10;
+  return `Water 💧 damage -10hp your health is now ${villainHero.vhp}hp`
 }
-JohnHero.prototype.earth = function () {
-  return `Earth 🌴 damage -15hp your health is now ${this.hp - 15}hp`
+JohnHero.prototype.earth = function (villainHero) {
+  villainHero.vhp -= 15;
+  return `Earth 🌴 damage -15hp your health is now ${villainHero.vhp}hp`
 }
-JohnHero.prototype.air = function () {
-  return `Air 💨 damage -25hp your health is now ${this.hp - 25}hp`
+JohnHero.prototype.air = function (villainHero) {
+  villainHero.vhp -= 25;
+  return `Air 💨 damage -25hp your health is now ${villainHero.vhp}hp`
 }
-JohnHero.prototype.combo = function () {
-  return `COMBOOOOO !!! 😎😹 Air 💨,Earth 🌴,Water 💧,fire 🔥 damage -100hp your health is now ${this.hp - 100}hp`
+JohnHero.prototype.combo = function (villainHero) {
+  villainHero.vhp -= 100;
+  return `COMBOOOOO !!! 😎😹 Air 💨,Earth 🌴,Water 💧,fire 🔥 damage -100hp your health is now ${villainHero.vhp}hp`
 }
 
 //  Villain
@@ -168,13 +173,16 @@ function VillainHero(villainAttributes) {
   this.village = villainAttributes.village;
 }
 VillainHero.prototype = Object.create(Humanoid.prototype);
-VillainHero.prototype.fart = function (johnHero) {
-  this.jhp -= 10;
-  return `Fart 💩-10hp damage ${this.jhp}hp`
+
+VillainHero.prototype.fart = function (objectHero) {
+  objectHero.jhp -= 10;
+  return `Fart 💩-10hp damage john health is now ${objectHero.jhp}hp`
 }
-VillainHero.prototype.poison = function () {
-  return `Poison 🐍 -25hp damage ${this.jhp - 25}hp`
+VillainHero.prototype.poison = function (objectHero) {
+  objectHero.jhp -= 25;
+  return `Poison 🐍 -25hp damage john health is now ${objectHero.jhp - 25}hp`
 }
+
 
 // stretch char mikkoAvater
 const john = new JohnHero({
@@ -221,8 +229,5 @@ console.log(`The battle of ${john.name}  of ${john.village} and ${villain.name} 
 console.log(`One day the peaceful ${john.village} was attacked by ${villain.name} and killed 100 people of ${john.village}`)
 console.log(`${john.name} heard the bad news and immedietely look for ${villain.name} and challenge him to duel him to leave his village so no one else get hurt and they`);
 console.log(`The next morning ${john.name} ${villain.name} began their duel`);
-
-console.log(`First the ${villain.name} attacked ${john.name} with his fart 😹 power ${villain.fart()} john health is now ${john.jhp}hp`)
-
-
-
+console.log(`First the ${villain.name} attacked ${john.name} with his fart 😹 power ${villain.fart(john)} john health is now ${john.jhp}hp`)
+console.log(`And then ${john.name} attacked the villain with a combo finisher ${john.combo(villain)} wahahaha`);
